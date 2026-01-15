@@ -30,6 +30,7 @@ Step 1: Launch an EC2 Instance
 3. Launch the instance.
 
 # Step 2: Connect to the Instance 
-ssh -i your-key.pem ec2-user@<public-ip>    # Amazon Linux
-ssh -i your-key.pem ubuntu@<public-ip>      # Ubuntu
+ssh -i your-key.pem ec2-user@<public-ip>   Amazon Linux
+
+ssh -i your-key.pem ubuntu@<public-ip>     Ubuntu
 
