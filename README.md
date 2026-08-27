@@ -11,9 +11,6 @@ AWS EC2 web server deployment with automated User Data scripting to provision Ng
 - Amazon Linux / Ubuntu
 - Nginx or Apache (httpd/apache2)
 - VS Studio Code SSH
-
-# Screenshots
-
   
 
 # Setup Instructions
