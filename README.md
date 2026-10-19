@@ -25,13 +25,13 @@ Web server installation:
 
 # Ubuntu + Nginx
 sudo apt update && sudo apt install nginx -y
-sudo systemctl start -- nginx
-sudo systemctl enable -- nginx
+sudo systemctl start --nginx
+sudo systemctl enable --nginx
 
 # Amazon Linux + Apache
 sudo yum install httpd -y
-sudo systemctl start -- httpd
-sudo systemctl enable -- httpd
+sudo systemctl start --httpd
+sudo systemctl enable --httpd
 
 Put the custom page at /var/www/html/index.html and open http://<public-ip>.
 
