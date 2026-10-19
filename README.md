@@ -33,7 +33,7 @@ sudo yum install httpd -y
 sudo systemctl start -- httpd
 sudo systemctl enable -- httpd
 
-6. Put the custom page at /var/www/html/index.html and open http://<public-ip>.
+Put the custom page at /var/www/html/index.html and open http://<public-ip>.
 
 ## Differences between the two builds
 - Apache is apache2 on Ubuntu and httpd on Amazon Linux.
