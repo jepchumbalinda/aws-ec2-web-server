@@ -1,33 +1,50 @@
 # aws-ec2-web-server
-AWS EC2 web server deployment with automated User Data scripting to provision Nginx/Apache on a Free Tier instance.
-# Project Overview
-- Launched a t2.micro EC2 instance on Amazon Linux/Ubuntu.
-- Configured security groups to allow SSH (port 22) and HTTP (port 80).
-- Installed and configured Nginx/Apache web server.
-- Deployed a custom static webpage accessible via the public IP.
 
-# Technologies Used
-- AWS EC2
-- Amazon Linux / Ubuntu
-- Nginx or Apache (httpd/apache2)
-- VS Studio Code SSH
-  
+AWS EC2 web server deployment with an automated User Data script that provisions Nginx or Apache on a Free Tier instance. I built it twice to compare setups: Ubuntu with Nginx, and Amazon Linux with Apache.
 
-# Setup Instructions
-Step 1: Launch an EC2 Instance
-1. In the AWS Management Console, go to EC2 → Launch Instance.
-2. Configure:
-   - Name: MyLinux Server
-   - AMI: Amazon Linux 2023 or Ubuntu Server 22.04 LTS
-   - Instance Type: t2.micro 
-   - Key Pair: lilokey.pem
-   - Security Group: Allow
-     - SSH (port 22) – from My IP or Anywhere (for testing)
-     - HTTP (port 80) – from Anywhere (0.0.0.0/0)
-3. Launch the instance.
+## What I built
+- Launched t2.micro EC2 instances on Ubuntu Server 22.04 LTS and Amazon Linux.
+- Configured security groups to allow only SSH (port 22) and HTTP (port 80).
+- Installed and started Nginx on Ubuntu and Apache httpd on Amazon Linux, automated with a Bash User Data script.
+- Deployed a custom static webpage reachable at each instance's public IP.
+- Connected with key-pair SSH from a terminal and from VS Code Remote - SSH.
+- Terminated the instances after testing to avoid charges.
 
-# Step 2: Connect to the Instance 
-ssh -i your-key.pem ec2-user@<public-ip>   Amazon Linux
+## Setup
+1. EC2 > Launch instance. Name: MyLinux Server. Type: t2.micro. Key pair: lilokey.pem.
+2. AMI: Ubuntu Server 22.04 LTS (Nginx build) or Amazon Linux (Apache build).
+3. Security group: allow SSH (22) and HTTP (80).
+4. Connect with the key pair (use the instance's public IP) from the AWS instance IP address section.
 
-ssh -i your-key.pem ubuntu@<public-ip>     Ubuntu
+# My key
+chmod 400 lilokey.pem
+ssh -i lilokey.pem ubuntu@<public-ip>      # Ubuntu
+ssh -i lilokey.pem ec2-user@<public-ip>    # Amazon Linux
+
+Web server installation:
+
+# Ubuntu + Nginx
+sudo apt update && sudo apt install nginx -y
+sudo systemctl start -- nginx
+sudo systemctl enable -- nginx
+
+# Amazon Linux + Apache
+sudo yum install httpd -y
+sudo systemctl start -- httpd
+sudo systemctl enable -- httpd
+
+6. Put the custom page at /var/www/html/index.html and open http://<public-ip>.
+
+## Differences between the two builds
+- Apache is apache2 on Ubuntu and httpd on Amazon Linux.
+- The default SSH user is ubuntu on Ubuntu and ec2-user on Amazon Linux.
+- Package managers differ: apt on Ubuntu, yum on Amazon Linux.
+
+## Security notes
+- Only ports 22 and 80 are open on the security group.
+- The private key is set to chmod 400; SSH rejects keys other users can read.
+- Beyond a demo, I would restrict SSH to my own IP instead of 0.0.0.0/0 and serve over HTTPS instead of plain HTTP.
+
+## Tools I used
+AWS EC2, Ubuntu, Amazon Linux, Nginx, Apache, Bash, SSH, VS Code Remote - SSH
 
