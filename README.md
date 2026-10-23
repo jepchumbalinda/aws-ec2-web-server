@@ -11,7 +11,7 @@ AWS EC2 web server deployment with an automated User Data script that provisions
 - Terminated the instances after testing to avoid charges.
 
 ## Setup
-1. EC2 > Launch instance. Name: MyLinux Server. Type: t2.micro. Key pair: lilokey.pem.
+1. Launch an EC2 instance. Name: MyLinux Server. Type: t2.micro. Key pair: lilokey.pem.
 2. AMI: Ubuntu Server 22.04 LTS (Nginx build) or Amazon Linux (Apache build).
 3. Security group: allow SSH (22) and HTTP (80).
 4. Connect with the key pair (use the instance's public IP) from the AWS instance IP address section.
